@@ -1,0 +1,14 @@
+# Librerías base para Quarto/Jupyter
+PyYAML
+ipykernel
+jupyter
+
+# Librerías extraídas del análisis
+IPython
+numpy
+pandas
+plotly
+polars
+pyodbc
+pyspark
+scipy
