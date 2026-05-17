@@ -10,6 +10,7 @@
 # 1. Metadatos del Documento
 # Estos son los campos básicos que deberás actualizar en cada informe.
 title: "Título del Informe"
+subtitle: "Subtítulo del Informe"
 author: "Nombre"
 lang: es
 date: last-modified

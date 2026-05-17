@@ -11,7 +11,7 @@ Una plantilla diseñada para la creación estructurada de informes interactivos 
 
 Este repositorio proporciona un entorno base configurado para facilitar la generación de reportes y centralizar herramientas útiles para el trabajo diario de analítica de datos.
 
----
+Este material se encuentra disponible bajo la licencia **Creative Commons Atribución 4.0 Internacional (CC BY 4.0)**. Se autoriza su uso, reproducción y adaptación para cualquier fin, incluso comercial, siempre que se otorgue el crédito correspondiente. Para más detalles, consulte: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es)
 
 ## 🌟 Características Principales
 
