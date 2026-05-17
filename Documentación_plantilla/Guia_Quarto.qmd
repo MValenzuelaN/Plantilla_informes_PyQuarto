@@ -1,0 +1,336 @@
+---
+title: "Guía Completa de Quarto con Python"
+author: "Plantilla PyQuarto"
+lang: es
+date: last-modified
+date-format: long
+editor: source
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
+    toc-location: left
+    toc-title: "Índice"
+    toc-depth: 3
+    number-sections: true
+    embed-resources: true
+    smooth-scroll: true
+    code-fold: true
+    code-line-numbers: true
+    highlight-style: atom-one
+    html-math-method: katex
+    css: "../css/styles.css"
+    include-after-body: "../css/footer-watermark.html"
+---
+
+# Introducción a Quarto
+
+Quarto es un sistema de publicación técnica y científica de código abierto de última generación, construido sobre Pandoc. Está diseñado para facilitar la creación de documentos reproducibles, combinando texto narrativo formateado en Markdown, código ejecutable (Python, R, Julia) y la visualización directa de los resultados en múltiples formatos de salida profesionales.
+
+## Características de la Plataforma
+
+Quarto destaca por las siguientes capacidades clave descritas en la @tbl-features:
+
+| Dimensión | Detalle Funcional |
+|---|---|
+| **Soporte Multilenguaje** | Ejecución nativa de celdas de código en Python, R, Julia y Observable JS. |
+| **Versatilidad de Formatos** | Capacidad de exportar a HTML autocontenido, documentos PDF, reportes en Microsoft Word, presentaciones interactivas (Reveal.js) y tableros de control (Dashboards). |
+| **Reproducibilidad Extrema** | Vincula de manera inquebrantable el análisis de datos, el código fuente y las conclusiones dentro de un único archivo ejecutable (`.qmd`). |
+| **Diseño y Estética Premium** | Integración nativa de temas Bootstrap (Bootstrap 5) con soporte claro/oscuro incorporado. |
+| **Notación Científica** | Soporte de LaTeX completo para fórmulas matemáticas complejas mediante KaTeX o MathJax. |
+| **Referencias Cruzadas** | Mecanismo formal de referencias y citación automática de figuras, tablas, ecuaciones y secciones. |
+| **Arquitectura de Extensión** | Soporte para personalización avanzada mediante filtros Lua y extensiones del ecosistema. |
+| **Visualización Estructurada** | Renderizado inmediato de flujos e diagramas Mermaid y Graphviz de manera nativa. |
+
+: Resumen de características técnicas del ecosistema de Quarto {#tbl-features}
+
+---
+
+# Configuración del Entorno de Trabajo
+
+Para facilitar el desarrollo cooperativo y asegurar que cualquier programador o analista pueda ejecutar los informes de forma inmediata, se provee un sistema automatizado de dependencias.
+
+## Instalación del CLI de Quarto
+
+Descargue e instale el motor de renderizado de Quarto desde el sitio oficial: [quarto.org/docs/get-started](https://quarto.org/docs/get-started/). Una vez instalado, verifique su correcta integración en el PATH de su sistema operativo mediante la terminal:
+
+```bash
+quarto --version
+```
+
+## Automatización del Entorno (Llegar y Usar)
+
+Esta plantilla está optimizada para omitir pasos engorrosos de configuración manual. Hemos integrado un flujo automatizado a través de un archivo instalador:
+
+- Archivo de instalación: `Documentación_plantilla/Instalar_Dependencias.bat`
+
+Al hacer doble clic en este archivo ejecutable por lotes (Batch), el sistema realiza las siguientes operaciones en segundo plano:
+
+1. **Escaneo Dinámico de Dependencias:** Ejecuta el script interno `Documentación_plantilla/scripts/generar_requerimientos.py` que recorre tanto los archivos de código Python (`.py`) como los documentos de Quarto (`.qmd`) del proyecto, identificando todos los paquetes importados.
+2. **Generación del Manifiesto:** Genera automáticamente el archivo de manifiesto actualizado en `Documentación_plantilla/scripts/requirements.txt`.
+3. **Instalación Global:** Ejecuta a través de PowerShell la instalación silenciosa de los paquetes detectados directamente en el entorno global del intérprete de Python mediante:
+   ```powershell
+   python -m pip install -r requirements.txt
+   ```
+
+::: {.callout-important}
+### Requisito del Motor Jupyter
+Entre las dependencias críticas instaladas de forma automática se encuentran `jupyter` e `ipykernel`. Quarto utiliza Jupyter Notebook como motor subyacente para computar las celdas de código en Python. Sin estos dos paquetes instalados y registrados en el PATH de Python, Quarto no podrá ejecutar ningún bloque de código interno del informe.
+:::
+
+---
+
+# Arquitectura y Diseño de Archivos `.qmd`
+
+Un documento Quarto (`.qmd`) es una combinación organizada de configuración estructurada y contenido analítico.
+
+## Bloque de Configuración (YAML Metadata)
+
+Ubicado al principio del archivo entre delimitadores `---`, este bloque define las directivas de compilación, estilos globales, parámetros y meta-información del reporte:
+
+```yaml
+---
+title: "Título Profesional del Informe"
+author: "Nombre del Autor o Área Organizacional"
+date: last-modified
+date-format: long
+format:
+  html:
+    theme: flatly
+    toc: true
+    code-fold: true
+jupyter: python3
+---
+```
+
+## Estructura del Contenido Ejecutable
+
+A continuación del bloque YAML, el analista combina la narrativa formateada en Markdown con **bloques de código (code chunks)** delimitados de la siguiente forma:
+
+````markdown
+## Análisis Descriptivo
+
+En esta sección realizamos la carga del dataset corporativo y evaluamos las dimensiones del mismo.
+
+```{{python}}
+#| label: carga-datos
+#| echo: true
+import pandas as pd
+df = pd.DataFrame({"Métrica": ["A", "B", "C"], "Valor": [120, 450, 310]})
+df
+```
+````
+
+---
+
+# Configuración Centralizada e Inicialización
+
+Uno de los mayores valores añadidos de esta plantilla es la centralización y aislamiento del código de infraestructura en el archivo **`Inicialización.qmd`**.
+
+## Arquitectura Plug-and-Play
+
+En lugar de delegar las utilidades de análisis a un archivo externo propicio a corrupciones de ruta (`init.py` o `functions.py`), **todas las funciones se encuentran inyectadas e implementadas directamente dentro de `Inicialización.qmd`**.
+
+Esto permite que el desarrollador final simplemente importe esta inicialización de manera transparente al inicio de su reporte principal:
+
+```markdown
+{{{< include Inicialización.qmd >}}}
+```
+
+## Funciones Utilitarias Integradas
+
+La inicialización provee las siguientes funciones analíticas de grado de producción:
+
+### Pretty Table (`pretty_table`)
+
+Visualizador avanzado de DataFrames compatible nativamente con **Pandas**, **Polars** y **PySpark**. 
+- Emula la visualización detallada de un `Tibble` de R (mostrando tipos de datos `<str>`, `<int64>` coloreados).
+- Incorpora botones interactivos para descargar los datos en tiempo real en formatos **CSV**, **Excel**, **HTML** y **Parquet** (con sanitización de codificación de caracteres especiales).
+- Permite resaltar filas o columnas utilizando paletas de colores pastel personalizadas.
+
+### Query to DF (`query_to_df`)
+
+Motor robusto para la extracción de datos desde servidores SQL Server mediante conexiones ODBC (`pyodbc`).
+- Admite ejecución en streaming mediante iteradores para optimizar el consumo de memoria RAM en datasets masivos (`chunksize` configurable).
+- Convierte automáticamente los resultados al motor preferido (Pandas o Polars) según la configuración.
+
+### Boxplot-Histograma Interactivo (`boxhist_interactivo`)
+
+Genera un cuadro de mando analítico univariado e interactivo mediante Plotly.
+- Integra histogramas de densidad apilados (con cálculo automático de bins por Freedman-Diaconis).
+- Alinea verticalmente diagramas de caja (boxplots) con marcas de Media y Mediana.
+- Genera dinámicamente una tabla de métricas que incluye tests estadísticos de normalidad y conteo de valores atípicos.
+
+---
+
+# Directivas Avanzadas de Compilación
+
+## Parámetros de Control Global (`execute`)
+
+Puede definir comportamientos globales de renderizado dentro de la raíz del YAML:
+
+```yaml
+execute:
+  echo: true       # Muestra u oculta el código fuente en el reporte final.
+  eval: true       # Activa o desactiva la computación de las celdas.
+  warning: false   # Oculta avisos o advertencias de librerías.
+  error: false     # Detiene la renderización del reporte si ocurre un error en el código.
+```
+
+## Personalización de Tablas de Contenidos
+
+```yaml
+format:
+  html:
+    toc: true
+    toc-location: left   # Ubica la tabla de contenidos a la izquierda, derecha o centrada.
+    toc-depth: 3         # Límite jerárquico de títulos a mostrar en el índice.
+    toc-expand: 2        # Nivel de títulos que aparecerán desplegados por defecto.
+```
+
+---
+
+# Interfaz de Línea de Comandos (CLI)
+
+El motor de Quarto ofrece una serie de comandos estructurados para operar desde la terminal de Windows o PowerShell:
+
+| Comando de Consola | Acción Realizada |
+|---|---|
+| `quarto preview archivo.qmd` | Abre un servidor local interactivo que recompila el informe al guardar cambios. |
+| `quarto render archivo.qmd` | Compila el archivo `.qmd` a su formato por defecto definido en el YAML. |
+| `quarto render archivo.qmd --to pdf` | Fuerza la compilación del reporte exclusivamente a formato PDF. |
+| `quarto render archivo.qmd --to docx` | Fuerza la compilación del reporte exclusivamente a formato Microsoft Word. |
+| `quarto check` | Realiza una auditoría del entorno detectando motores de Python, Jupyter y rutas de LaTeX. |
+
+: Comandos esenciales del Quarto Command Line Interface {#tbl-commands}
+
+---
+
+# Flujo de Formatos e Integración
+
+Quarto recopila la narrativa, compila el código a través de Jupyter Kernel y delega a Pandoc la exportación del informe final a cualquiera de los canales admitidos:
+
+```{mermaid}
+%%| label: fig-formats
+%%| fig-cap: "Flujos de compilación y soportes del ecosistema Quarto"
+%%| fig-width: 7
+
+graph LR
+    QMD["archivo.qmd"] --> HTML["HTML"]
+    QMD --> PDF["PDF (LaTeX)"]
+    QMD --> DOCX["Word (Office)"]
+    QMD --> REVEALJS["Presentación Reveal.js"]
+    QMD --> WEBSITE["Sitio Web"]
+    QMD --> BOOK["Libro Digital"]
+    QMD --> DASHBOARD["Dashboard Interactivo"]
+
+    style QMD fill:#2c3e50,color:#fff,stroke:#2c3e50
+    style HTML fill:#27ae60,color:#fff
+    style PDF fill:#c0392b,color:#fff
+    style DOCX fill:#2980b9,color:#fff
+    style REVEALJS fill:#8e44ad,color:#fff
+    style WEBSITE fill:#e67e22,color:#fff
+    style BOOK fill:#16a085,color:#fff
+    style DASHBOARD fill:#f39c12,color:#fff
+```
+
+---
+
+# Bloques Visuales y Elementos Científicos
+
+## Notación Matemática Avanzada
+
+Las fórmulas se renderizan mediante sintaxis LaTeX estándar. Puede incluirlas en línea: $E = m \cdot c^2$, o en bloque aislado para un mayor realce visual:
+
+$$
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^{\!2} \right)
+$$
+
+## Paneles de Contenido Plegado (Callouts)
+
+Permiten clasificar la información y ofrecer una jerarquía visual clara.
+
+::: {.callout-note}
+### Nota Técnica
+Los callouts son componentes pre-estilizados de Bootstrap. Puede utilizarlos con diferentes categorías visuales de gravedad: `note` (azul), `tip` (verde), `warning` (amarillo), `caution` (naranja) o `important` (rojo).
+:::
+
+::: {.callout-tip}
+### Consejo de Desarrollo
+Siempre configure `code-fold: true` en sus reportes corporativos. Esto mantiene la presentación visual ejecutiva limpia, mientras permite a los auditores técnicos expandir y analizar el código fuente si lo desean.
+:::
+
+## Estructura de Pestañas Iterativas (Tabsets)
+
+Permite presentar código o explicaciones multi-lenguaje o multi-enfoque de forma compacta:
+
+::: {.panel-tabset}
+
+### Motor Pandas
+
+```python
+import pandas as pd
+df = pd.read_csv("datos.csv")
+df.describe()
+```
+
+### Motor Polars
+
+```python
+import polars as pl
+df = pl.read_csv("datos.csv")
+df.describe()
+```
+
+### Motor PySpark
+
+```python
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.getOrCreate()
+df = spark.read.csv("datos.csv", header=True, inferSchema=True)
+df.describe().show()
+```
+
+:::
+
+---
+
+# Flujo de Trabajo Metódico
+
+Para garantizar la coherencia en el desarrollo y la entrega formal de los reportes, se recomienda seguir el siguiente proceso secuencial:
+
+```{mermaid}
+%%| label: fig-workflow
+%%| fig-cap: "Flujo metodológico de desarrollo y empaquetado analítico"
+%%| fig-width: 8
+
+graph TD
+    A["1. Instalar entorno<br/>y dependencias"] --> B["2. Escribir .qmd<br/>YAML + Narrativa"]
+    B --> C["3. Implementar análisis<br/>Inclusión de Inicialización"]
+    C --> D["4. Previsualización en vivo<br/>quarto preview"]
+    D --> E{"¿Compilación limpia?"}
+    E -- No --> B
+    E -- Sí --> F["5. Renderizar informe final<br/>quarto render"]
+    F --> G["6. Desplegar y compartir<br/>Reporte HTML / PDF"]
+
+    style A fill:#2c3e50,color:#fff
+    style B fill:#2c3e50,color:#fff
+    style C fill:#2c3e50,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#2980b9,color:#fff
+    style G fill:#8e44ad,color:#fff
+```
+
+---
+
+# Documentación y Recursos de Referencia
+
+- [Sitio Web y Guías Oficiales de Quarto](https://quarto.org/docs/guide/)
+- [Uso de Motores de Computación con Python](https://quarto.org/docs/computations/python.html)
+- [Catálogo de Temas Estéticos para HTML](https://quarto.org/docs/output-formats/html-themes.html)
+- [Galería Oficial de Tableros de Control e Interfaces](https://quarto.org/docs/dashboards/)
+- [Repositorio de Extensiones y Filtros Avanzados](https://quarto.org/docs/extensions/)
