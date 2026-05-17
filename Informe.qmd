@@ -1,94 +1,6 @@
----
-# 1. Metadatos del Documento
-# Estos son los campos básicos que deberás actualizar en cada informe.
-title: "Título del Informe"
-author: "Nombre"
-lang: es
-date: last-modified
-date-format: long
-editor: source
-title-block-banner: true # Mantiene el banner del título
-
-# 2. Habilita ejecución con Jupyter/Python
-jupyter: python3
-
-# 3. Comportamiento Global de Ejecución
-# Estas opciones se aplicarán a *todos* los chunks de código (Python, R, Julia).
-execute:
-  echo: true     # Muestra el código por defecto
-  warning: false # Oculta advertencias
-  error: false   # Detiene la renderización si un chunk falla
-  # Que los chunks se evalúen al renderizar (por defecto es true)
-  eval: true
-
-# 4. Formato de Salida (HTML)
-# Combina todas las mejores opciones de tus 3 ejemplos.
-format:
-  html:
-    # --- Tema y Diseño ---
-    theme:
-      light: flatly
-      dark: darkly
-    page-layout: article
-    smooth-scroll: true
-    embed-resources: true # Incrusta todo (CSS, JS, imágenes) en un solo HTML
-
-    # --- Tabla de Contenidos (TOC) ---
-    toc: true
-    toc-location: left
-    toc-title: "Contenido"
-    toc-depth: 3
-    toc-expand: 2 # Expande los primeros 2 niveles de la TOC
-
-    # --- Numeración de Secciones ---
-    number-sections: true
-    number-depth: 3
-
-    # --- Opciones de Código ---
-    code-fold: true         # Permite a los lectores plegar/desplegar chunks
-    code-line-numbers: true # Muestra números de línea
-    code-link: true         # Enlace para copiar código
-    highlight-style: atom-one
-    code-tools:
-      source: true   # Botón "Ver Código Fuente" (del .qmd)
-      toggle: false  # Oculta el botón "Mostrar/Ocultar todo el código"
-      caption: "Código fuente"
-
-    # --- Opciones de Figuras y Tablas ---
-    fig-cap-location: bottom
-    tbl-cap-location: top
-    lightbox: true # Permite ver imágenes en pantalla completa (de YAML 3)
-
-    # --- Opciones de Renderizado y Enlaces ---
-    html-math-method: katex  # Renderizado rápido de matemáticas (LaTeX)
-    link-external-icon: true
-    link-external-newwindow: true
-
-    # --- Filtros Adicionales ---
-    # Permite un botón para ver el código en pantalla completa (de YAML 3)
-    filters: 
-      - code-fullscreen 
-
-    # --- Estilos Personalizados ---
-    css: "css/styles.css"
-
-    # --- Marca de Agua / Firma de autoría ---
-    include-after-body: "css/footer-watermark.html"
----
-
-::: {.callout-note icon="true"}
-## Resumen
-
-[Escribe el resumen del informe aquí. Este se muestra en un recuadro amarillo y con un icono de nota. Puede durar uno o varios párrafos. La sintaxys es similar al formato markdown. Se puede usar negritas, cursiva, etc. Se puede incluir imágenes, tablas, etc.]
-:::
-
-# Contexto del informe
-
-[Escribe el contexto del informe aquí. Este se muestra en un recuadro blanco con borde negro. Puede durar uno o varios párrafos. La sintaxys es similar al formato markdown. Se puede usar negritas, cursiva, etc. Se puede incluir imágenes, tablas, etc.]
-
 {{< include Inicialización.qmd >}}
 
-[Aquí estará el cuerpo del informe. Puede tener las siguientes secciones u otras que prefieras: 
+<!-- Aquí estará el cuerpo del informe. Puede tener las siguientes secciones u otras que prefieras: 
 1. Introducción
 2. Contexto
 3. Metodología
@@ -96,4 +8,4 @@ format:
 5. Conclusiones
 6. Referencias
 7. Anexos
-Cada sección puede tener subsecciones. EL informe está hecho para utilizar python y reenderizar como HTML, pero eventualmente podrías agregar código en otros lenguajes como R, Julia, etc. o incluso combinar varios de ellos. Cada sección puede tener imágenes, tablas, etc. También puedes usar otros formatos de documentos, como LaTeX, Word, etc.]
+Cada sección puede tener subsecciones. EL informe está hecho para utilizar python y reenderizar como HTML, pero eventualmente podrías agregar código en otros lenguajes como R, Julia, etc. o incluso combinar varios de ellos. Cada sección puede tener imágenes, tablas, etc. También puedes usar otros formatos de documentos, como LaTeX, Word, etc. -->
