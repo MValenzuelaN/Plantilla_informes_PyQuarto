@@ -13,44 +13,11 @@ Este repositorio proporciona un entorno base configurado para facilitar la gener
 
 Este material se encuentra disponible bajo la licencia **Creative Commons Atribución 4.0 Internacional (CC BY 4.0)**. Se autoriza su uso, reproducción y adaptación para cualquier fin, incluso comercial, siempre que se otorgue el crédito correspondiente. Para más detalles, consulte: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.es)
 
-## 🌟 Características Principales
-
-*   **Diseño Dual Adaptativo**: Soporte para temas claro y oscuro (`Flatly` / `Darkly`) que permite alternar la visualización con un clic en la esquina superior derecha del reporte.
-*   **Interactividad en Bloques de Código**:
-    *   Código plegable/desplegable por defecto (`code-fold: true`).
-    *   Números de línea y enlaces rápidos de copiado.
-    *   Extensión integrada de **Pantalla Completa** (`code-fullscreen`) para expandir y leer con comodidad bloques de código extensos.
-*   **Reportes Auto-Contenidos**: Compilación a un único archivo HTML (`embed-resources: true`) que incrusta todo el CSS, Javascript e imágenes. Facilita compartir el archivo de manera directa por correo, chat o almacenamiento local.
-*   **Marca de Agua de Autoría**: Firma sutil en el pie de página que indica la procedencia de la plantilla y enlaza al perfil de GitHub del desarrollador.
-*   **Tabla de Contenidos**: Menú lateral izquierdo auto-generado que se desplaza de manera sincronizada al navegar por las secciones del informe.
-
 ---
 
-## 📂 Estructura del Repositorio
+## 🔍 Vista Previa: Utilidades de Analítica (`Inicialización.qmd`)
 
-```bash
-├── Informe.qmd                      # Plantilla principal del informe de analítica
-├── Inicialización.qmd                # Centralización de librerías y funciones utilitarias
-├── Informe.html                     # Copia compilada auto-contenida del reporte de ejemplo
-├── css/
-│   ├── styles.css                   # Estilos visuales complementarios (topbar y cuerpo)
-│   └── footer-watermark.html        # Estructura y estilos de la firma/marca de agua en el pie de página
-├── Documentación_plantilla/
-│   ├── Guia_Quarto.html             # Guía de referencia sobre el uso y sintaxis de Quarto
-│   ├── Instalar_Dependencias.bat    # Script de automatización de instalación en Windows
-│   └── scripts/
-│       ├── generar_requerimientos.py # Script que extrae imports y genera requirements.txt
-│       └── requirements.txt         # Lista de paquetes de Python detectados
-└── _extensions/                     # Extensiones de Quarto incorporadas
-    └── shafayetShafee/
-        └── code-fullscreen          # Extensión Lua/JS para ver bloques de código en pantalla completa
-```
-
----
-
-## 🛠️ Utilidades de Analítica (`Inicialización.qmd`)
-
-Al incluir [`Inicialización.qmd`](file:///c:/Users/elitebook%20hp/Documents/GitHub/Plantilla_informes/Inicialización.qmd) en tu reporte principal, se cargan por defecto un conjunto de librerías comunes y tres funciones utilitarias de análisis:
+Al incluir [`Inicialización.qmd`](./Inicialización.qmd) en tu reporte principal, se cargan por defecto un conjunto de librerías comunes y tres funciones utilitarias de análisis:
 
 ### 1. `pretty_table` (Pseudo-tibble HTML)
 
@@ -127,26 +94,57 @@ fig.show()
 
 ---
 
-## 📥 Instalación de Dependencias
+## 🌟 Características Principales
 
-El repositorio cuenta con una forma automatizada de gestionar las librerías de Python necesarias para evitar inconsistencias en el entorno.
+*   **Diseño Dual Adaptativo**: Soporte para temas claro y oscuro (`Flatly` / `Darkly`) que permite alternar la visualización con un clic en la esquina superior derecha del reporte.
+*   **Interactividad en Bloques de Código**:
+    *   Código plegable/desplegable por defecto (`code-fold: true`).
+    *   Números de línea y enlaces rápidos de copiado.
+    *   Extensión integrada de **Pantalla Completa** (`code-fullscreen`) para expandir y leer con comodidad bloques de código extensos.
+*   **Reportes Auto-Contenidos**: Compilación a un único archivo HTML (`embed-resources: true`) que incrusta todo el CSS, Javascript e imágenes. Facilita compartir el archivo de manera directa por correo, chat o almacenamiento local.
+*   **Marca de Agua de Autoría**: Firma sutil en el pie de página que indica la procedencia de la plantilla y enlaza al perfil de GitHub del desarrollador.
+*   **Tabla de Contenidos**: Menú lateral izquierdo auto-generado que se desplaza de manera sincronizada al navegar por las secciones del informe.
 
-### En Windows (Un Clic)
-1. Abre el directorio `Documentación_plantilla/`.
-2. Ejecuta el archivo **`Instalar_Dependencias.bat`**.
+---
 
-> **Funcionamiento interno:**
-> Este instalador ejecuta en primer lugar [`generar_requerimientos.py`](file:///c:/Users/elitebook%20hp/Documents/GitHub/Plantilla_informes/Documentación_plantilla/scripts/generar_requerimientos.py). Este script escanea estáticamente los archivos `.qmd` y `.py` de la raíz del proyecto para extraer los imports reales y escribir un `requirements.txt` actualizado. Luego, invoca a `pip` para instalar los requerimientos detectados junto con las dependencias base de Jupyter y Quarto (`jupyter`, `ipykernel`, `PyYAML`).
-
-### Manual (Consola)
-Si prefieres utilizar la consola de comandos o gestionar un entorno virtual específico, abre tu terminal en el directorio raíz del proyecto y ejecuta:
+## 📂 Estructura del Repositorio
 
 ```bash
-# 1. Generar la lista de requerimientos actualizada en base a los scripts y archivos .qmd
-python Documentación_plantilla/scripts/generar_requerimientos.py
+├── Informe.qmd                      # Plantilla principal del informe de analítica
+├── Inicialización.qmd                # Centralización de librerías y funciones utilitarias
+├── css/
+│   ├── styles.css                   # Estilos visuales complementarios (topbar y cuerpo)
+│   └── footer-watermark.html        # Estructura y estilos de la firma/marca de agua en el pie de página
+├── Documentación_plantilla/
+│   ├── Guia_plantilla_PyQuarto.qmd  # Guía de referencia sobre el uso y sintaxis de Quarto
+│   ├── Instalar_Dependencias.bat    # Instalador automático para Windows
+│   └── scripts/
+│       ├── Instalar_Dependencias.command # Instalador automático para macOS / Linux
+│       └── requirements_pinned.txt       # Lista de paquetes y entorno validado
+└── _extensions/                     # Extensiones de Quarto incorporadas
+    └── shafayetShafee/
+        └── code-fullscreen          # Extensión Lua/JS para ver bloques de código en pantalla completa
+```
 
-# 2. Instalar los paquetes con pip
-pip install -r Documentación_plantilla/scripts/requirements.txt
+---
+
+## 📥 Instalación de Dependencias
+
+Para asegurar la reproducibilidad del reporte, este proyecto proporciona un entorno validado y un instalador automatizado para personas que no tengan experiencia técnica avanzada.
+
+### Script Instalador Automático (Recomendado)
+Dependiendo de tu sistema operativo, navega a la carpeta correspondiente y haz doble clic en el archivo:
+
+- **Windows:** Navega a `Documentación_plantilla/` y haz doble clic en `Instalar_Dependencias.bat`
+- **macOS / Linux:** Navega a `Documentación_plantilla/scripts/` y haz doble clic en `Instalar_Dependencias.command` (o ejecuta `./Instalar_Dependencias.command` en terminal)
+
+Estos scripts instalarán automáticamente todas las librerías necesarias para que la plantilla funcione.
+
+### Instalación Manual (Consola)
+Si prefieres instalar los requerimientos directamente a través de `pip` en tu entorno:
+
+```bash
+pip install -r Documentación_plantilla/scripts/requirements_pinned.txt
 ```
 
 ---
@@ -154,7 +152,7 @@ pip install -r Documentación_plantilla/scripts/requirements.txt
 ## 🚀 Guía de Inicio Rápido
 
 ### 1. Configuración de Metadatos
-Abre el archivo [`Informe.qmd`](file:///c:/Users/elitebook%20hp/Documents/GitHub/Plantilla_informes/Informe.qmd) y actualiza los metadatos YAML en la cabecera (título, autor, idioma):
+Abre el archivo [`Informe.qmd`](./Informe.qmd) y actualiza los metadatos YAML en la cabecera (título, autor, idioma):
 
 ```yaml
 title: "Título de tu Informe"
@@ -176,7 +174,7 @@ Para generar el reporte interactivo final en HTML, abre la consola en la raíz d
 quarto render Informe.qmd
 ```
 
-El informe auto-contenido `Informe.html` se creará en el mismo directorio, listo para ser visualizado en cualquier navegador.
+El informe auto-contenido se generará (o actualizará mediante GitHub Actions si está configurado) listo para ser visualizado en cualquier navegador.
 
 ---
 
