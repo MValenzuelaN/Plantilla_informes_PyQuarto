@@ -180,13 +180,20 @@ El informe auto-contenido `Informe.html` se creará en el mismo directorio, list
 
 ---
 
-## ✍️ Créditos y Autoría
+## ✍️ Créditos y Agradecimientos
 
+### Autoría del Proyecto
 Esta plantilla y su suite de utilidades de analítica en Python y Quarto han sido desarrolladas por:
 
 *   **Matías Valenzuela Nuche**
     *   GitHub: [@MValenzuelaN](https://github.com/MValenzuelaN)
 
+### Extensiones de Terceros
+El proyecto incorpora y reconoce el trabajo de la comunidad de Quarto, en particular:
+
+*   **code-fullscreen**: Extensión desarrollada por [@shafayetShafee](https://github.com/shafayetShafee) que añade el botón de pantalla completa a los bloques de código. Repositorio original: [shafayetShafee/code-fullscreen](https://github.com/shafayetShafee/code-fullscreen).
+
+---
 Cualquier propuesta, reporte de fallos o contribución para expandir las utilidades es bienvenida mediante *pull requests* o *issues* en el repositorio.
 
 ---
