@@ -19,8 +19,8 @@ then
     exit 1
 fi
 
-# Instalar requerimientos
-python3 -m pip install -r requirements_pinned.txt
+# Ejecutar el script de instalación dinámica
+python3 instalar_dependencias.py
 if [ $? -ne 0 ]; then
     echo ""
     echo -e "\033[1;31m[ERROR] Hubo un problema durante la instalación.\033[0m"

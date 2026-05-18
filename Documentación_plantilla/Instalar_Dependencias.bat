@@ -21,8 +21,8 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-:: Ejecuta la instalación usando requirements_pinned.txt para asegurar reproducibilidad
-python -m pip install -r scripts\requirements_pinned.txt
+:: Ejecuta el script de instalación dinámica de librerías
+python scripts\instalar_dependencias.py
 if %errorlevel% neq 0 (
     color 0C
     echo.

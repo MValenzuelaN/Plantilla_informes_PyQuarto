@@ -100,7 +100,7 @@ Esta plantilla está optimizada para omitir pasos engorrosos de configuración m
 
 Al hacer doble clic en el archivo correspondiente a tu sistema operativo, el sistema instalará las dependencias requeridas de forma automática.
 
-El entorno está definido y congelado en `Documentación_plantilla/scripts/requirements_pinned.txt` para garantizar la total reproducibilidad del reporte a largo plazo.
+El entorno se instala de forma inteligente y dinámica mediante el script `Documentación_plantilla/scripts/instalar_dependencias.py`, el cual analiza los reportes del repositorio e instala exactamente las librerías necesarias.
 
 ::: {.callout-important}
 ### Requisito del Motor Jupyter

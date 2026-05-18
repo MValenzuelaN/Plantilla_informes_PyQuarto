@@ -120,7 +120,7 @@ fig.show()
 │   ├── Instalar_Dependencias.bat    # Instalador automático para Windows
 │   └── scripts/
 │       ├── Instalar_Dependencias.command # Instalador automático para macOS / Linux
-│       └── requirements_pinned.txt       # Lista de paquetes y entorno validado
+│       └── instalar_dependencias.py      # Script de instalación dinámica de librerías
 └── _extensions/                     # Extensiones de Quarto incorporadas
     └── shafayetShafee/
         └── code-fullscreen          # Extensión Lua/JS para ver bloques de código en pantalla completa
@@ -141,10 +141,10 @@ Dependiendo de tu sistema operativo, navega a la carpeta correspondiente y haz d
 Estos scripts instalarán automáticamente todas las librerías necesarias para que la plantilla funcione.
 
 ### Instalación Manual (Consola)
-Si prefieres instalar los requerimientos directamente a través de `pip` en tu entorno:
+Si prefieres instalar los requerimientos directamente ejecutando el script dinámico desde tu entorno:
 
 ```bash
-pip install -r Documentación_plantilla/scripts/requirements_pinned.txt
+python Documentación_plantilla/scripts/instalar_dependencias.py
 ```
 
 ---
