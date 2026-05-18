@@ -152,7 +152,7 @@ python Documentación_plantilla/scripts/instalar_dependencias.py
 ## 🚀 Guía de Inicio Rápido
 
 ### 1. Configuración de Metadatos
-Abre el archivo [`Informe.qmd`](./Informe.qmd) y actualiza los metadatos YAML en la cabecera (título, autor, idioma):
+Abre el archivo [`Inicialización.qmd`](./Inicialización.qmd) y actualiza los metadatos YAML en la cabecera (título, autor, idioma):
 
 ```yaml
 title: "Título de tu Informe"
